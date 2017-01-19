@@ -1030,10 +1030,10 @@ game_status:
     	beq $t3, $t2, gameStatusLoop
     	la $t2, 0x10
     	and $t3, $t2, $t1
-    	beq $t3, $t2, gameStatusDone
+    	beq $t3, $t2, gameWinIncrement
     	la $t2, 0x20
     	and $t3, $t2, $t1
-    	beq $t3, $t2, gameStatusDone
+    	beq $t3, $t2, gameWinIncrement
     	j gameStatusLoop
     flagIncrement:
     gameWinIncrement:
@@ -1044,6 +1044,7 @@ game_status:
     li $v0, -1
     j gameStatusExit
     gameStatusWin:
+    bge $s1, 1, gameStatusDone
     li $v0, 1
     j gameStatusExit    	
     gameStatusDone:
